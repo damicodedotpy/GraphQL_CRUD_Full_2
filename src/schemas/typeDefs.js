@@ -12,6 +12,12 @@ const typeDefs = `
         message: String
     }
 
+    input PaginationInput {
+        id: String
+        page: Int
+        limit: Int
+    }
+
     type Query {
         _ : Boolean
     }

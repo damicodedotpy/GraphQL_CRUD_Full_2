@@ -9,7 +9,7 @@
 // Definir los types de los usuarios para el Schema y exportarlos
 module.exports = `
     type User {
-        id: ID!
+        id: String!
         email: String!
         hashedPassword: String
         token: String
@@ -17,8 +17,7 @@ module.exports = `
     }
 
     extend type Query {
-        getUsers: [User]
-        getUser(id: ID!): User
+        users( options: PaginationInput ): [User]
     }
 
     input UserInput {
@@ -27,7 +26,9 @@ module.exports = `
     }
 
     extend type Mutation {
-        signUp(input: UserInput): User
-        logIn(input: UserInput): User
+        singup(input: UserInput): User
+        login(input: UserInput): User
+        updateUser( id: String!, input: UserInput ): User
+        deleteUser( id: String! ): Alert
     }
 `;

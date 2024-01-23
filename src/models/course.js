@@ -8,12 +8,20 @@ const paginate = require("mongoose-paginate-v2");
 // ******************************************************************************
 // Definir el esquema para el modelo Course
 const courseSchema = new Schema({
+    _id: {
+        type: String,
+        required: true
+    },
     title: String,
     views: Number,
     user: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User"
     }
+},
+{
+    versionKey: false,
+    _id: false
 });
 
 // Agregar el plugin de paginacion al esquema

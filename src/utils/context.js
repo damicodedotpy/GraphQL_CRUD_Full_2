@@ -5,7 +5,7 @@ const jsonwebtoken = require('jsonwebtoken');
 // ********************************OWN LIBRARIES*********************************
 const userModel = require('../models/user');
 // ******************************************************************************
-module.exports = async ({ req }) => {
+module.exports = async ( { req } ) => {
 
     // Obtener el token de la cabecera de la petición
     const token = req.headers.authorization || '';
@@ -14,19 +14,19 @@ module.exports = async ({ req }) => {
     let currentUser = null;
 
     // Verificar si se ha enviado un token y decodificarlo
-    if(token) {
+    if( token ) {
         try {
             // Verificar y decodificar el token
-            decodedInfo = jsonwebtoken.verify(token, process.env.SECRET_KEY);
+            decodedInfo = jsonwebtoken.verify( token, process.env.SECRET_KEY );
 
             // Lanzar error si el token no es válido
-            if(!decodedInfo) throw new Error('INVALID_TOKEN');
+            if( !decodedInfo ) throw new Error( 'INVALID_TOKEN' );
 
             // Obtener el usuario asociado al token
-            currentUser = await userModel.findById(decodedInfo.id);
+            currentUser = await userModel.findById( decodedInfo.id );
 
             // Lanzar error si el usuario no existe
-            if(!currentUser) throw new Error('USER_NOT_FOUND');
+            if( !currentUser ) throw new Error( 'USER_NOT_FOUND' );
             
         } catch (error) {
             // Mensaje de error standar
